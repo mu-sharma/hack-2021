@@ -1,0 +1,71 @@
+<div class="container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="card m-b-15">
+<div class="card-header">Patient Info</div>
+<div class="card-body">
+    <div class="row">
+     
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="control-label" for="email">Email address:</label>
+          <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email" value="ronaldo@gmail.com">
+        </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label class="control-label" for="firstName">First Name:</label>
+              <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName" value="Christino">
+            </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="lastName" class="control-label">Last Name:</label>
+              <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName" value="Ronaldo">
+            </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+            <label for="count">DOB:</label>
+            <input type="date" formControlName="dob" placeholder="Date of Birth" name="dob" class="form-control" id="dob" value="1988-10-01">
+          </div>
+    </div>
+
+  <div class="col-md-4">
+          <div class="form-group">
+              <label for="count">Phone Number:</label>
+              <input formControlName="phone" placeholder="Phone Number" name="phone" class="form-control" id="phone" value="8998821821">
+            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+            <label for="count">Insurance Provider:</label>
+            <input formControlName="phone" placeholder="Insurance Provider" name="insProv" class="form-control" id="insProv" value="UHC Care">
+          </div>  
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+          <label for="count">Height (cm):</label>
+          <input formControlName="ht" placeholder="Height" name="ht" class="form-control" id="ht" value="180">
+        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+        <label for="count">Weight (Kg):</label>
+        <input formControlName="wt" placeholder="Weight" name="wt" class="form-control" id="wt" value="75">
+      </div>
+</div>
+    <div class="col-md-4">
+      <div class="form-group">
+          <label for="count">Address :</label>
+          <textarea name="address" placeholder="Address" rows="3" cols="59" value="9 Eggendart Alley
+          Denver, Colorado, 80243
+          United States"></textarea>
+        </div>  
+  </div>
+
+    </div>
+  </div>
+  </div>
+</form>
+</div>

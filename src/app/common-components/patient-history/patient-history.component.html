@@ -1,0 +1,108 @@
+<div class="container">
+  <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+ <div class="card m-b-15">
+ <div class="card-header">Patient Progress Card</div>
+ <div class="card-body">
+     <div class="row" >
+        <table style="width:100%">
+            <tr>
+              <th>Diagnosis Details (Date: 12-07-2021)</th>
+              <th>Health Graph</th> 
+              
+            </tr>
+            <tr >
+              <td>Jill</td>
+              <td style="width:50%"><highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart></td>
+              
+            </tr>
+            <tr>
+              <td> </td>
+              <td style="width:50%;"> <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart></td>
+            
+            </tr>
+          
+          </table>
+       </div> </div> </div> </div>
+
+
+
+<div class="container">
+  <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+ <div class="card m-b-15">
+ <div class="card-header">General Medical History</div>
+ <div class="card-body">
+     <div class="row" >
+<!-- <fieldset [disabled]="true"> -->
+        <div class="col-md-4">
+            <div class="form-group" >
+                <label class="control-label" for="smoking">Smoking Status :</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                    <label class="form-check-label" for="inlineCheckbox1">Occasional</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">Regular</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+                    <label class="form-check-label" for="inlineCheckbox3">Never</label>
+                  </div>
+              </div>
+        </div>
+
+       <div class="col-md-12">
+           <div class="form-group">
+               <label class="control-label" for="Allergies">List any allergies:</label>
+               <textarea name="message" placeholder="Alergies" rows="2" cols="200"></textarea>
+             </div>
+       </div>
+       <div class="col-md-12">
+         <div class="form-group">
+             <label class="control-label" for="Past Illness">List any Medical Problems (asthma, seizures, headaches):</label>
+             <textarea name="message" placeholder="Past Illness" rows="3" cols="200"></textarea>
+           </div>
+     </div>
+     <div class="col-md-12">
+       <div class="form-group">
+           <label class="control-label" for="Medications going on">List any medication taken regularly:</label>
+           <textarea name="message" placeholder="medication" rows="2" cols="200"></textarea>
+         </div>
+   </div>
+      
+ 
+   <div class="col-md-12">
+     <div class="form-group">
+         <label class="control-label" for="Immunizations">Immunizations:</label>
+         <textarea name="message" placeholder="Immunizations" rows="1" cols="200"></textarea>
+       </div>
+ </div>
+ 
+  <div class="col-md-12">
+   <div class="form-group">
+       <label class="control-label" for="Family Health History">Family Health History:</label>
+       <textarea name="message" placeholder="Family Health History" rows="4" cols="200"></textarea>
+     </div>
+ </div> 
+ 
+ <div class="col-md-12">
+   <div class="form-group">
+       <label class="control-label" for="Results of Physical exam and results">Health Habits:</label>
+       <textarea name="message" placeholder="Health Habits:" rows="2" cols="200"></textarea>
+     </div>
+ </div>
+
+  <!-- <video width="320" height="240" controls>
+    <source src="movie.mp4" type="video/mp4">
+    <source src="movie.ogg" type="video/ogg">
+    Your browser does not support the video tag.
+  </video> -->
+<!-- </fieldset> -->
+     </div>
+   </div>
+   </div>
+  <!--  </form> -->
+ </div>
+ 
+ 
+ 

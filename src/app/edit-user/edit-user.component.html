@@ -1,0 +1,202 @@
+<div class="container">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+<div class="card m-b-15">
+  <div class="card-header">Add Patient Prescription</div>
+  <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label" for="email">Email address:</label>
+            <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" for="firstName">First Name:</label>
+                <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+              </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="lastName" class="control-label">Last Name:</label>
+                <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+              </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="data_source" class="control-label">Disease Category :</label>
+                <select id="data_source" formControlName="diseaselist" class="form-control">
+                  <option value="acqdis">Acquired disease</option>
+                  <option value="acdis">Acute disease</option>
+                  <option value="chdis">Chronic disease</option>
+                  <option value="gendis">Genetic disease</option>
+                  <option value="icdis">Incurable disease</option>
+                  <option value="cudis">Curable disease</option>
+                  <option value="terdis">Terminal disease</option>
+                </select>
+              </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="count">Source count:</label>
+                <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+              </div>
+        </div>
+        <div class="col-md-12">
+          <fieldset><legend>Diagnosis</legend>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                <label class="form-check-label" for="inlineCheckbox1">Hypertension</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                  <label class="form-check-label" for="inlineCheckbox1">Hyperlipidemia</label>
+                </div> 
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                    <label class="form-check-label" for="inlineCheckbox1">Diabetes type 1</label>
+                  </div> 
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                      <label class="form-check-label" for="inlineCheckbox1">Diabetes type 2</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                        <label class="form-check-label" for="inlineCheckbox1">Obesity</label>
+                      </div> 
+                      <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                          <label class="form-check-label" for="inlineCheckbox1">Allergic rhinitis</label>
+                        </div> 
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                            <label class="form-check-label" for="inlineCheckbox1">Reflux esophagitis</label>
+                          </div> 
+                          <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                              <label class="form-check-label" for="inlineCheckbox1">Respiratory problems</label>
+                            </div> 
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                <label class="form-check-label" for="inlineCheckbox1">Vitamin D definicieny</label>
+                              </div> 
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                  <label class="form-check-label" for="inlineCheckbox1">Hypothyroidism</label>
+                                </div> 
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                    <label class="form-check-label" for="inlineCheckbox1">Visual refractive errors</label>
+                                  </div>  
+                                  <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                      <label class="form-check-label" for="inlineCheckbox1">Osteoporosis</label>
+                                    </div> 
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                        <label class="form-check-label" for="inlineCheckbox1">Osteoarthritis</label>
+                                      </div> 
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                          <label class="form-check-label" for="inlineCheckbox1">Fibromyalgia / myositis</label>
+                                        </div> 
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                            <label class="form-check-label" for="inlineCheckbox1">Nail fungus</label>
+                                          </div> 
+                                          <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                              <label class="form-check-label" for="inlineCheckbox1">Coronary atherosclerosis</label>
+                                            </div> 
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                <label class="form-check-label" for="inlineCheckbox1">Acute laryngopharyngitis</label>
+                                              </div> 
+                                              <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                  <label class="form-check-label" for="inlineCheckbox1">Acute maxillary sinusitis</label>
+                                                </div> 
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                    <label class="form-check-label" for="inlineCheckbox1">Major depressive disorder</label>
+                                                  </div> 
+                                                  <div class="form-check form-check-inline">
+                                                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                      <label class="form-check-label" for="inlineCheckbox1">Acute bronchitis</label>
+                                                    </div> 
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                        <label class="form-check-label" for="inlineCheckbox1">Asthma</label>
+                                                      </div> 
+                                                      <div class="form-check form-check-inline">
+                                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                          <label class="form-check-label" for="inlineCheckbox1">Urinary tract infection</label>
+                                                        </div> 
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                            <label class="form-check-label" for="inlineCheckbox1">Dementia</label>
+                                                          </div> 
+                                                          <div class="form-check form-check-inline">
+                                                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                              <label class="form-check-label" for="inlineCheckbox1">Epilepsy</label>
+                                                            </div> 
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                <label class="form-check-label" for="inlineCheckbox1">Motor Neurone Disease</label>
+                                                              </div> 
+                                                              <div class="form-check form-check-inline">
+                                                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                  <label class="form-check-label" for="inlineCheckbox1">Multiple Sclerosis</label>
+                                                                </div> 
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                    <label class="form-check-label" for="inlineCheckbox1">Pagets' disease of the bone</label>
+                                                                  </div> 
+                                                                  <div class="form-check form-check-inline">
+                                                                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                      <label class="form-check-label" for="inlineCheckbox1">Parkinson's disease</label>
+                                                                    </div> 
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                        <label class="form-check-label" for="inlineCheckbox1">Deep Vein Thrombosis</label>
+                                                                      </div> 
+                                                                      <div class="form-check form-check-inline">
+                                                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                          <label class="form-check-label" for="inlineCheckbox1">Shingles</label>
+                                                                        </div> 
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10">
+                                                                            <label class="form-check-label" for="inlineCheckbox1">Cholesterol</label>
+                                                                          </div> 
+                                                                           
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+              </div>
+              
+          </fieldset>
+        </div>
+      </div>
+      
+  </div>
+</div>
+<table>
+  <tr>
+    <td>
+<div class="form-actions text-left">
+    <button class="btn btn-sm btn-success">Add Prescription</button>
+</div>
+    </td>
+<td>
+<div class="form-actions text-right">
+    <button class="btn btn-sm btn-success">Update</button>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>

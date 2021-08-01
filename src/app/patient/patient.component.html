@@ -1,0 +1,420 @@
+<div  style="text-align:center;background: bisque">
+    <h2>
+       {{ careName}}
+        </h2>
+</div>
+
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+          <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+
+            <button type="button" class="btn btn-primary" (click)="sendPatientInfo();">Send</button>
+            <button type="button" class="btn btn-success" *ngIf="!showInfo">Update</button>
+        </div>
+    </div>
+
+
+
+  <div class="container" width="100%">
+    <div class="card m-b-15">
+    <div class="card-header">Patient Info</div>
+    <div class="card-body">
+        <div class="row">
+         
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label" for="email">Email address:</label>
+              {{email}}
+            </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label" for="firstName">First Name:</label>
+                  {{fname}}
+                </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label for="lastName" class="control-label">Last Name:</label>
+                  {{lname}}
+                </div>
+          </div>
+    
+          <div class="col-md-4">
+            <div class="form-group">
+                <label for="count">DOB:</label>
+              {{dob}}
+              </div>
+        </div>
+    
+      <div class="col-md-4">
+              <div class="form-group">
+                  <label for="count">Phone Number:</label>
+                  {{phone}}
+                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <label for="count">Insurance Provider:</label>
+              UHC Care
+              </div>  
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+              <label for="count">Height (cm):</label>
+           180
+            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+            <label for="count">Weight (Kg):</label>
+           75
+          </div>
+    </div>
+        <div class="col-md-4">
+          <div class="form-group">
+              <label for="count">Address :</label>
+             {{address}}
+            </div>  
+      </div>
+    
+        </div>
+      </div>
+      </div>
+    </div>
+<app-patient-profile *ngIf="showInfo"></app-patient-profile>
+<div class="container">
+    <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+   <div class="card m-b-15">
+   <div class="card-header">Patient Progress Card</div>
+   <div class="card-body">
+       <div class="row" >
+          <table style="width:100%" >
+              <tr>
+                <th>Diagnosis Details</th>
+                <th>Progress Card</th> 
+                
+              </tr>
+            
+                  
+                <td style="width:50%">
+                  <tr *ngFor="let diagnosisList of diagnosisHistoryList"  style="border: 1px solid black;">
+                    
+                    <td *ngFor="let diagnosis of diagnosisList.value"  style="border: none;">
+                      <ul>
+                    <li>Diagnosis: {{diagnosis.diagnosis}}</li>
+                    <li>Value : {{diagnosis.value}}</li>
+                    <li>Unit:  {{diagnosis.unit}}</li>
+                    <li>Date:  {{diagnosisList.key}}</li> 
+                   
+                  </ul>
+                
+                </td>
+                </tr>
+                 </td>
+                
+                <td style="width:50%"><highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart></td>
+                
+             
+              <!-- <tr>
+                <td> </td>
+                <td style="width:50%;"> <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart></td>
+              
+              </tr> -->
+            
+            </table>
+         </div> </div> </div> </div>
+  
+  
+  
+  <div class="container">
+    <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+   <div class="card m-b-15">
+   <div class="card-header">General Medical History</div>
+   <div class="card-body">
+       <div class="row" >
+  <!-- <fieldset [disabled]="true"> -->
+          <div class="col-md-4">
+              <div class="form-group" >
+                  <label class="control-label" for="smoking">Question 1 :</label><br>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                      <label class="form-check-label" for="inlineCheckbox1">Occasional</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                      <label class="form-check-label" for="inlineCheckbox2">Regular</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+                      <label class="form-check-label" for="inlineCheckbox3">Never</label>
+                    </div>
+                </div>
+          </div>
+  
+         <div class="col-md-12">
+             <div class="form-group">
+                 <label class="control-label" for="Allergies">List any allergies:</label>
+                 <textarea name="message" placeholder="Alergies" rows="2" cols="200" [value]="allergies">
+
+                 </textarea>
+               </div>
+         </div>
+         <div class="col-md-12">
+           <div class="form-group">
+               <label class="control-label" for="Past Illness">List any Medical Problems (asthma, seizures, headaches):</label>
+               <textarea name="message" placeholder="Past Illness" rows="3" cols="200" [value]="medical"></textarea>
+             </div>
+       </div>
+       <div class="col-md-12">
+         <div class="form-group">
+             <label class="control-label" for="Medications going on">List any medication taken regularly:</label>
+             <textarea name="message" placeholder="medication" rows="2" cols="200"[value]="medications"></textarea>
+           </div>
+     </div>
+        
+   
+     <div class="col-md-12">
+       <div class="form-group">
+           <label class="control-label" for="Immunizations">Immunizations:</label>
+           <textarea name="message" placeholder="Immunizations" rows="1" cols="200" [value]="immunization"></textarea>
+         </div>
+   </div>
+   
+    <div class="col-md-12">
+     <div class="form-group">
+         <label class="control-label" for="Family Health History">Family Health History:</label>
+         <textarea name="message" placeholder="Family Health History" rows="4" cols="200" [value]="familyHistory">
+         </textarea>
+       </div>
+   </div> 
+   
+ 
+  
+    <!-- <video width="320" height="240" controls>
+      <source src="movie.mp4" type="video/mp4">
+      <source src="movie.ogg" type="video/ogg">
+      Your browser does not support the video tag.
+    </video> -->
+  <!-- </fieldset> -->
+       </div>
+     </div>
+     </div>
+    <!--  </form> -->
+   </div>
+   
+   
+
+<div class="container">
+  <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+ <div class="card m-b-15">
+ <div class="card-header">Attach Medical Reports</div>
+ <div class="card-body">
+     <div class="row" >
+       <!--  <div [innerHTML]="div"></div> -->
+<div class="col-md-12">
+   <form action="/action_page.php">
+     <label for="myfile">Select files:</label>
+     <input type="file" id="myfile" name="myfile" multiple><br><br>
+     <input type="submit">
+   </form>
+   </div>
+  </div></div> </div></div>
+
+
+  <div class="container" width="100%">
+    <div class="card m-b-15">
+    <div class="card-header">Current Symptoms Questionaire</div>
+    <div class="card-body">
+        <div class="row">
+         
+          <div class="col-md-8">
+            <div class="form-group" >
+                <label class="control-label" for="smoking">Question 1 :Do you experience pain or discomfort in the chest ? </label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                    <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">No</label>
+                  </div>
+                  <br>
+                  <label class="form-check-label" for="inlineCheckbox2"><b>Fequency:</b>&nbsp;&nbsp; </label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                    <label class="form-check-label" for="inlineCheckbox1">once a week</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">twice a week</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">more than twice a week</label>
+                  </div>
+                  
+              </div>
+              
+        </div>
+        <div class="col-md-8">
+          <div class="form-group" >
+              <label class="control-label" for="smoking">Question 2 :Do you feel lightheadedness, nausea or vomiting? </label><br>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                  <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                  <label class="form-check-label" for="inlineCheckbox2">No</label>
+                </div>
+                <br>
+                <label class="form-check-label" for="inlineCheckbox2"><b>Fequency:</b>&nbsp;&nbsp; </label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                  <label class="form-check-label" for="inlineCheckbox1">once a week</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                  <label class="form-check-label" for="inlineCheckbox2">twice a week</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="option2">
+                  <label class="form-check-label" for="inlineCheckbox2">more than twice a week</label>
+                </div>
+                
+            </div>
+            
+      </div>
+      <div class="col-md-8">
+        <div class="form-group" >
+            <label class="control-label" for="smoking">Question 3 :Do you encounter pain in jaw, neck or back? </label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                <label class="form-check-label" for="inlineCheckbox2">No</label>
+              </div>
+              <br>
+              <label class="form-check-label" for="inlineCheckbox2"><b>Fequency:</b>&nbsp;&nbsp; </label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+                <label class="form-check-label" for="inlineCheckbox1">once a week</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+                <label class="form-check-label" for="inlineCheckbox2">twice a week</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="option2">
+                <label class="form-check-label" for="inlineCheckbox2">more than twice a week</label>
+              </div>
+              
+          </div>
+          
+    </div>
+    <div class="col-md-8">
+      <div class="form-group" >
+          <label class="control-label" for="smoking">Question 4 :Do you have discomfort or pain in arm or shoulder? </label><br>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+              <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+              <label class="form-check-label" for="inlineCheckbox2">No</label>
+            </div>
+            <br>
+            <label class="form-check-label" for="inlineCheckbox2"><b>Fequency:</b>&nbsp;&nbsp; </label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+              <label class="form-check-label" for="inlineCheckbox1">once a week</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+              <label class="form-check-label" for="inlineCheckbox2">twice a week</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="option2">
+              <label class="form-check-label" for="inlineCheckbox2">more than twice a week</label>
+            </div>
+            
+        </div>
+        
+  </div>
+  <div class="col-md-8">
+    <div class="form-group" >
+        <label class="control-label" for="smoking">Question 5 :Do you feel shortness of breath? </label><br>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+            <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+            <label class="form-check-label" for="inlineCheckbox2">No</label>
+          </div>
+          <br>
+          <label class="form-check-label" for="inlineCheckbox2"><b>Fequency:</b>&nbsp;&nbsp; </label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+            <label class="form-check-label" for="inlineCheckbox1">once a week</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+            <label class="form-check-label" for="inlineCheckbox2">twice a week</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="option2">
+            <label class="form-check-label" for="inlineCheckbox2">more than twice a week</label>
+          </div>
+          
+      </div>
+      
+</div>
+<div class="col-md-8">
+  <div class="form-group" >
+      <label class="control-label" for="smoking">Question 6 :Do you monitor your Blood pressure regularly ? </label><br>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+          <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+          <label class="form-check-label" for="inlineCheckbox2">No</label>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="col-md-8">
+  <div class="form-group" >
+      <label class="control-label" for="smoking">Question 7 :Do you feel discomfort in walking or climbing stairs? </label><br>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+          <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+          <label class="form-check-label" for="inlineCheckbox2">No</label>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="col-md-8">
+  <div class="form-group" >
+      <label class="control-label" for="smoking">Question 8 :Do you breakout in cold sweat? </label><br>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="I10" >
+          <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" checked="true" id="inlineCheckbox2" [value]="option2">
+          <label class="form-check-label" for="inlineCheckbox2">No</label>
+        </div>
+        
+    </div>
+ 

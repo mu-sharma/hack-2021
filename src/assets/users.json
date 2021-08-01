@@ -1,0 +1,35 @@
+{
+    "users": [
+      
+        {
+            "id": 1,
+            "userid": "marc@gmail.com",
+            "name": "Marc Jacobs",
+            "role": 1
+        },
+        {
+            "id": 2,
+            "userid": "alex@gmail.com",
+            "name": "Alex",
+            "role": 1
+        },
+        {
+            "id": 3,
+            "userid": "uhc_care@gmail.com",
+            "name": "UHC Care US",
+            "role": 2
+        },
+        {
+            "id": 4,
+            "userid": "india_care@gmail.com",
+            "name": "UHC Care India",
+            "role": 2
+        },
+        {
+            "id": 5,
+            "userid": "ire_care@gmail.com",
+            "name": "UHC Care Ireland",
+            "role": 2
+        }
+    ]
+}

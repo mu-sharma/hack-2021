@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">Patient List
+        <button class="btn btn-success pull-right" (click)="addUser()"><i class="fa fa-plus fa-fw"></i> Add Patient</button>
+    </div>
+    <div class="card-body pad-5">
+      
+    <table class="table table-striped m-b-0">
+      <colgroup>
+        <col style="width:auto;">
+        <col style="width:auto;">
+        <col style="width:auto;">
+        <col style="width:auto;">
+        <col style="width:15%;">
+      </colgroup>
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Email</th>
+          <th>Disease Category</th>
+          <th class="text-center">Actions</th>
+         <!--  <th>Action</th> -->
+        </tr>
+        </thead>
+       <tbody>
+        <tr *ngFor="let user of fakeUsers">
+          <td>{{user.id}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.disease}}</td>
+           <td class="text-center">
+              <button class="btn btn-sm btn-link" tooltip="View Prescription" (click)="viewPrescription(user)"><i class="fa fa-paperclip fa-fw"></i></button>
+            <button class="btn btn-sm btn-link" tooltip="View Record" (click)="viewUser(user)"><i class="fa fa-eye fa-fw"></i></button>
+              <button class="btn btn-link btn-sm" tooltip="Edit Record" (click)="editUser(user)"><i class="fa fa-pencil fa-fw"></i></button>
+              <button class="btn btn-link btn-sm" tooltip="Delete Record" (click)="deleteUser(user)"><i class="fa fa-trash fa-fw"></i></button>
+            </td>
+        </tr>
+         </tbody>
+      </table>
+    </div>
+  </div>    
+  </div>
