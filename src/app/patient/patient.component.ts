@@ -7,9 +7,8 @@ import {SharedWorker} from './.././model/worker.model'
 import { timer, of, Observable, Subject } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import {Router,ActivatedRoute, ParamMap} from "@angular/router";
-/* import {IMultiSelectOption,IMultiSelectTexts,IMultiSelectSettings} from 'ngx-bootstrap-multiselect';
- */
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 
 @Component({
   selector: 'app-patient',

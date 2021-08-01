@@ -22,8 +22,6 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from './service/global.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-/* import { NgxBootstrapMultiselectModule } from 'ngx-bootstrap-multiselect';
- */
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
@@ -50,13 +48,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     HighchartsChartModule,
-   /*  NgxBootstrapMultiselectModule,  */
     NgbModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
-  
-
-   // RouterModule.forRoot(routes);
   ],
   providers: [UserService, GlobalService,SharedService],
   bootstrap: [AppComponent]
