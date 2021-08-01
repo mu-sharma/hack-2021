@@ -7,8 +7,9 @@ import {SharedWorker} from './.././model/worker.model'
 import { timer, of, Observable, Subject } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import {Router,ActivatedRoute, ParamMap} from "@angular/router";
-import {IMultiSelectOption,IMultiSelectTexts,IMultiSelectSettings} from 'ngx-bootstrap-multiselect';
-
+/* import {IMultiSelectOption,IMultiSelectTexts,IMultiSelectSettings} from 'ngx-bootstrap-multiselect';
+ */
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-patient',
@@ -43,6 +44,9 @@ conditionInfo:any;
 medical:string="";
 familyHistory:string="";
 careName:any;
+dropdownList = [];
+selectedItems = [];
+dropdownSettings:IDropdownSettings = {};
 
 constructor(private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService,private router: Router,private route: ActivatedRoute) {
   const routeParams = this.route.snapshot.paramMap;
@@ -51,12 +55,28 @@ constructor(private modalService: NgbModal,private httpService: HttpService, pri
 
   ngOnInit() {
 
-    this.myOptions = [
-      { id: 1, name: 'UHC Care US' },
-      { id: 2, name: 'UHC Care INDIA' },
-      { id: 3, name: 'UHC Care England' },
-      { id: 4, name: 'UHC Care Netherland' },
-  ];
+     this.dropdownList = [
+      { id: 1, item_text: 'UHC Care US' },
+      { id: 2, item_text: 'UHC Care INDIA' },
+      { id: 3, item_text: 'UHC Care England' },
+      { id: 4, item_text: 'UHC Care Netherland' },
+  ]; 
+
+/*   this.selectedItems = [
+    { item_id: 3, item_text: 'Pune' },
+    { item_id: 4, item_text: 'Navsari' }
+  ]; */
+  this.dropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+
     this.fetchPatientInfo();
     this.fetchPatientObservations();
     this.fetchAllergiesInfo();
@@ -68,7 +88,12 @@ constructor(private modalService: NgbModal,private httpService: HttpService, pri
   enableProfile():void{
     this.showInfo=true;
   }
-
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
 
   async fetchPatientInfo() {
     const bundle: any = await this.httpService.getPatientResourceByQueryParam('Patient', '?_id=2438175');
@@ -258,31 +283,7 @@ this.diagnosisHistoryList.push(this.parentObj);
 
   }
 
-  optionsModel: number[];
-  myOptions: IMultiSelectOption[];
-// Text configuration
-myTexts: IMultiSelectTexts = {
-  checkAll: 'Select all',
-  uncheckAll: 'Unselect all',
-  checked: 'item selected',
-  checkedPlural: 'items selected',
-  searchPlaceholder: 'Find',
-  searchEmptyResult: 'Nothing found...',
-  searchNoRenderText: 'Type in search box to see results...',
-  defaultTitle: 'Select Hospital',
-  allSelected: 'All selected',
-};
+  
 
-// Settings configuration
-mySettings: IMultiSelectSettings = {
-  enableSearch: true,
-  checkedStyle: 'fontawesome',
-  buttonClasses: 'btn btn-default btn-block',
-  dynamicTitleMaxItems: 3,
-  displayAllSelectedText: true
-};
- 
-  onChange() {
-      console.log(this.optionsModel);
-  }
+
 }

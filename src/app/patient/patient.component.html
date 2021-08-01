@@ -6,13 +6,32 @@
 
 
     <div class="row">
-        <div class="col-md-12 text-right">
-          <ngx-bootstrap-multiselect [options]="myOptions" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+        <div class="col-md-7">
 
-            <button type="button" class="btn btn-primary" (click)="sendPatientInfo();">Send</button>
-            <button type="button" class="btn btn-success" *ngIf="!showInfo">Update</button>
+</div>
+<div class="col-md-3">
+    <ng-multiselect-dropdown
+    [placeholder]="'Hospital'"
+    [settings]="dropdownSettings"
+    [data]="dropdownList"
+    [(ngModel)]="selectedItems"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+  >
+</ng-multiselect-dropdown>
+           
         </div>
-    </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary" (click)="sendPatientInfo();">Send</button>
+           
+
+          </div>
+          <div class="row">
+              <div class="col-md-2">
+                  <button type="button" class="btn btn-success" *ngIf="!showInfo">Update</button>
+      </div>
+        </div>
+    
 
 
 
