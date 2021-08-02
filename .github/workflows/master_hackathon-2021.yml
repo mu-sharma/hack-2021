@@ -22,7 +22,6 @@ jobs:
         node-version: '12.13.0'
 
     - name: npm install and build
-      working-directory: ./hack-2021
       run: |
         npm install
         npm run build:prod
