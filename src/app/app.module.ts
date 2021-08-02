@@ -13,7 +13,6 @@ import { LinxModuleModule } from './linx-dashboard-module/linx-module/linx-modul
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ViewUserComponent } from './view-user/view-user.component';
 import { PatientComponent } from './patient/patient.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -31,7 +30,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     EditUserComponent,
     ListUserComponent,
     LoginComponent,
-    ViewUserComponent,
     PatientComponent,
     DoctorComponent,
     PatientHistoryComponent,

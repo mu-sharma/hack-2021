@@ -9,12 +9,12 @@ import {Router} from "@angular/router";
 })
 export class PatientProfileComponent implements OnInit {
 
- // profileForm: FormGroup;
+ profileForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router) { }
 
   ngOnInit() {
-  }
-  profileForm = this.formBuilder.group({
+    
+  this.profileForm = this.formBuilder.group({
     id: [1],
     email: ['ronaldo@gmail.com', Validators.required],
     firstName: ['Christino', Validators.required],
@@ -24,5 +24,9 @@ export class PatientProfileComponent implements OnInit {
     ht: ['180', Validators.required],
     dob: ['1985-10-03', Validators.required]
   });
+  }
+  onSubmit(){
+    console.log("Hi");
+  }
 }
 
