@@ -20,6 +20,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./doctor.component.sass']
 })
 export class DoctorComponent implements OnInit,OnDestroy,AfterContentChecked {
+  careName:string="UHC Care US";
   showInfo:boolean=false;
 patientInfo:any;
 observationInfo:any;
