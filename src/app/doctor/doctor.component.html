@@ -205,48 +205,27 @@
           <div class="col-md-12">
               <div class="form-group">
                   <label class="control-label" for="Symptoms & Observations">Symptoms & Observations:</label>
-                  <textarea name="message" placeholder="Observations" rows="2" cols="200"></textarea>
+                  <textarea name="message" placeholder="Observations" rows="2" cols="200" [value]="symptoms"></textarea>
                 </div>
           </div>
 
           <div class="col-md-12">
               <div class="form-group">
-                  <label class="control-label" for="Current Medications">Current Medications:</label>
-                  <textarea name="med" placeholder="Medicines" rows="2" cols="200"></textarea>
+                  <label class="control-label" for="Current Medications">Suggested Medications:</label>
+                  <textarea name="med" placeholder="Medicines" rows="2" cols="200" [value]="medicationTest"></textarea>
                 </div>
           </div>
-
-
-
-       
-       
+          <div class="col-md-12">
+              <div class="form-group">
+                  <label class="control-label" for="Current Medications">Suggested Lab Test:</label>
+                  <textarea name="med" placeholder="Medicines" rows="2" cols="200" [value]="diagnosisTest"></textarea>
+                </div>
+          </div>
        </div>
      </div>
      </div>
     <!--  </form> -->
    </div>
-<div class="container">
- <!--  <form [formGroup]="addForm3" (ngSubmit)="onSubmit()"> -->
-<div class="card m-b-15">
-<div class="card-header" style="background-color:mediumaquamarine;">Patient Future Health Prediction</div>
-<div class="card-body" style="background-color:lightblue;">
-    <div class="row">
-      <table>
-        <tr>
-     <td>
-      <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"></highcharts-chart>
-    </td>
-    <td>
-      <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions1"></highcharts-chart>
-    </td>
-  </tr>
-  </table>
-    
-    </div>
-  </div>
-  </div>
- <!--  </form> -->
-</div>
 
  <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
    

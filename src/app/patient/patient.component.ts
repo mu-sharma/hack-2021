@@ -8,6 +8,7 @@ import { timer, of, Observable, Subject } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import {Router,ActivatedRoute, ParamMap} from "@angular/router";
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -46,25 +47,36 @@ careName:any;
 dropdownList = [];
 selectedItems = [];
 dropdownSettings:IDropdownSettings = {};
+questionaireForm: FormGroup;
 
-constructor(private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService,private router: Router,private route: ActivatedRoute) {
+constructor(private formBuilder: FormBuilder,private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService,private router: Router,private route: ActivatedRoute) {
   const routeParams = this.route.snapshot.paramMap;
   this.careName = routeParams.get('name');
 }
+ 
 
   ngOnInit() {
-
+    this.questionaireForm = this.formBuilder.group({
+      chestDiscomfort: [],
+      q1: [],
+      breathShortness: [],
+      q2: [],
+      q11: [],
+      q12: [],
+      q13: [],
+      q21: []
+    });
      this.dropdownList = [
-      { id: 1, item_text: 'UHC Care US' },
-      { id: 2, item_text: 'UHC Care INDIA' },
-      { id: 3, item_text: 'UHC Care England' },
-      { id: 4, item_text: 'UHC Care Netherland' },
+      { item_id: 1, item_text: 'UHC Care US' },
+      { item_id: 2, item_text: 'UHC Care INDIA' },
+      { item_id: 3, item_text: 'UHC Care England' },
+      { item_id: 4, item_text: 'UHC Care Netherland' }
   ]; 
 
-/*   this.selectedItems = [
-    { item_id: 3, item_text: 'Pune' },
-    { item_id: 4, item_text: 'Navsari' }
-  ]; */
+  this.selectedItems = [
+    { item_id: 1, item_text: 'UHC Care US' }
+  ]; 
+  
   this.dropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -179,10 +191,10 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 47
       }, {
-        name: 'Body Temparature',
+        name: 'Blood Pressure',
         y: 34.5
       }, {
-        name: 'BMI',
+        name: 'Blood Glucose',
         y: 21.2
       }]
     }, {
@@ -192,10 +204,10 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 48
       }, {
-        name: 'Body Temparature',
+        name: 'Blood Pressure',
         y: 34.5
       }, {
-        name: 'BMI',
+        name: 'Blood Glucose',
         y: 20.2
       }]
     }, {
@@ -205,10 +217,10 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 44
       }, {
-        name: 'Body Temparature',
+        name: 'Blood Pressure',
         y: 36.5
       }, {
-        name: 'BMI',
+        name: 'Blood Glucose',
         y: 20.2
       }]
       
@@ -261,6 +273,10 @@ for(let a of entryList){
   let componentList=a.resource.component;
   let effectiveDateTime= a.resource.effectiveDateTime;
   for(let a of componentList){
+  /*   if(a.code.text=='Blood pressure'){
+      let b=a.valueQuantity.value;
+      a.valueQuantity.value=b.replace('.','-');
+    } */
 this.objDiag ={
  diagnosis:a.code.text,
  value:a.valueQuantity.value,
@@ -283,6 +299,25 @@ this.diagnosisHistoryList.push(this.parentObj);
   }
 
   
+  async onSubmit(form:FormGroup){
 
-
+ var request=   [
+      {
+      "symptom": form.controls.chestDiscomfort.value,
+      "frequency" : form.controls.q1.value
+      },
+       {
+      "symptom": form.controls.breathShortness.value,
+      "frequency" :form.controls.q2.value
+      }
+  ];
+  
+  const bundle: any = await this.httpService.postDataQuestionaire(request);
+  localStorage.removeItem('questionaireRequest');
+  localStorage.removeItem('questionaireResponse');
+  localStorage.setItem('questionaireRequest', JSON.stringify(request));
+  localStorage.setItem('questionaireResponse', JSON.stringify(bundle));
+ 
+  }
+   
 }

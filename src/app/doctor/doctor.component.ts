@@ -44,8 +44,11 @@ immunization:string="";
 conditionInfo:any;
 medical:string="";
 familyHistory:string="";
-
-
+questionaireRequest:any;
+questionaireResponse:any;
+diagnosisTest:string="";
+medicationTest:string="";
+symptoms:string="";
 
 constructor(private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService) {}
 
@@ -56,6 +59,9 @@ constructor(private modalService: NgbModal,private httpService: HttpService, pri
     this.fetchMedicationsInfo();
     this.fetchImmunizationInfo();
     this.fetchConditionInfo();
+    this.getKnowGrapghPrediction();
+    this.consumeDataFromPatients();
+    
   
   }
   enableProfile():void{
@@ -191,8 +197,7 @@ this.diagnosisHistoryList.push(this.parentObj);
 
 async consumeDataFromPatients(){
   const bundle: any = await this.httpService.getDataFromPatients();
-  this.observationInfo = bundle;
-  console.log( this.observationInfo);
+  console.log("bundle", bundle);
 //  alert(bundle);
 
 }
@@ -256,5 +261,27 @@ ngOnDestroy(){
 open(mymodal:any){
  let id= " #mymodal let-modal"
   this.modalService.open(id);
+}
+
+getKnowGrapghPrediction(){
+  this.questionaireRequest = JSON.parse(localStorage.getItem('questionaireRequest'))
+  this.questionaireResponse = JSON.parse(localStorage.getItem('questionaireResponse'))
+  for (let dt of this.questionaireResponse.diagnosisTest){
+    this.diagnosisTest=this.diagnosisTest +dt + " ,";
+    
+}
+console.log(this.diagnosisTest);
+for (let med of this.questionaireResponse.medication){
+  this.medicationTest=this.medicationTest +med + " ,";
+  
+}
+
+for (let symp of this.questionaireRequest){
+  this.symptoms="Symptoms :" +symp.symptom + " Frequency :"+symp.frequency+ ", ";
+  
+}
+
+
+console.log(this.medicationTest);
 }
 }
