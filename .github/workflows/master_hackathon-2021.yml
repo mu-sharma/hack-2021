@@ -33,4 +33,4 @@ jobs:
         app-name: 'hackathon-2021'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c4358f1846f64f82a66043cbc28198bb }}
-        package: ./hack-2021/dist/hack-2021
+        package: .
