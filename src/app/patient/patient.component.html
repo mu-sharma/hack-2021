@@ -5,39 +5,13 @@
 </div>
 
 
-    <div class="row">
-        <div class="col-md-9">
-
-</div>
-<div class="col-md-3">
-    <ng-multiselect-dropdown
-    [placeholder]="'Choose Hospital'"
-    [settings]="dropdownSettings"
-    [data]="dropdownList"
-    [(ngModel)]="selectedItems"
-    (onSelect)="onItemSelect($event)"
-    (onSelectAll)="onSelectAll($event)"
-  >
-</ng-multiselect-dropdown>
-           
-        </div>
-        
-    
-
-
-
   <div class="container" width="100%">
     <div class="card m-b-15">
     <div class="card-header">Patient Info</div>
     <div class="card-body">
         <div class="row">
          
-          <div class="col-md-4">
-            <div class="form-group">
-              <label class="control-label" for="email">Email address:</label>
-              {{email}}
-            </div>
-          </div>
+        
           <div class="col-md-4">
               <div class="form-group">
                   <label class="control-label" for="firstName">First Name:</label>
@@ -50,7 +24,12 @@
                   {{lname}}
                 </div>
           </div>
-    
+          <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label" for="email">Email address:</label>
+                {{email}}
+              </div>
+            </div>
           <div class="col-md-4">
             <div class="form-group">
                 <label for="count">DOB:</label>
@@ -227,22 +206,62 @@
    <form action="/action_page.php">
      <label for="myfile">Select files:</label>
      <input type="file" id="myfile" name="myfile" multiple><br><br>
-     <input type="submit">
+     <input type="submit" (click)="submitFiles();">
    </form>
    </div>
   </div></div> </div></div>
+ 
+    <!--  <form [formGroup]="addForm2" (ngSubmit)="onSubmit()"> -->
+   <div class="card m-b-15">
+   <div class="card-header">Connect Doctor</div>
+   <div class="card-body">
+      <div class="container">
+        
+      <div class="row" ></div>
+  <div class="col-md-12">
+        <label for="ConnectToDoctor">Do you want to Connect with Doctor. If Yes <button type="submit"  (click)="enableCategory();" id="connect" name="connect">Click here to connect with Doctor
+        </button>  </label>
+      </div>
+     
 
+<div class="col-md-3" *ngIf="chooseCategory">
+<label for="category">Choose Health Issue Category:</label>
+<select name="cat" id="cat" (change)="enableHospital();">
+    <option value="default">Choose Issue</option>
+  <option value="heart">Heart Issues</option>
+  <option value="behavioral">Behavioral Issues</option>
+</select>
+</div>
+  
+  <div class="col-md-3" *ngIf="chooseHospital">
+      <ng-multiselect-dropdown
+      [placeholder]="'Choose Hospital'"
+      [settings]="dropdownSettings"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+    >
+  </ng-multiselect-dropdown>
+             
+          </div>
+          
+      
+  
 
-  <div class="container" width="100%">
+    </div>
+  </div></div> 
+
+  <div *ngIf="connectToDoc" class="container" width="100%">
     <form [formGroup]="questionaireForm" (ngSubmit)="onSubmit(questionaireForm)"> 
        
     <div class="card m-b-15">
-    <div class="card-header">Current Symptoms Questionaire</div>
+    <div class="card-header">Please fill Answers to below questions on current symptoms</div>
     <div class="card-body">
         <div class="row">
          
-          <div class="col-md-8">
-            <div class="form-group"  >
+          <div class="col-md-8" >
+            <div class="form-group">
                 <label class="control-label" for="smoking">Question 1 :Do you experience pain or discomfort in the chest ? </label><br>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" formControlName="chestDiscomfort" name="chestDiscomfort" type="radio" id="chestDiscomfort1" value="chestDiscomfort" >
@@ -442,9 +461,40 @@
       <div class="button-align">
     <button class="btn btn-success" (click)="sendPatientInfo();" type="submit">Submit</button>
     <button type="button" class="btn btn-warning" (click)="updateProfile();" *ngIf="!showInfo">Update</button>
+   
   </div>
   </form>
       </div>
+
+      
+ <div class="container"  *ngIf=isPrescripAvail>
+    <!--  <form [formGroup]="addForm3" (ngSubmit)="onSubmit()"> -->
+   <div class="card m-b-15"  id="htmlData" >
+   <div class="card-header" style="background-color:mediumaquamarine;">Prescribed Medication and Tests</div>
+   <div class="card-body" style="background-color:lightblue;">
+       <div class="row">
+
+          <div class="col-md-10">
+              <div class="form-group">
+                  <label class="control-label" for="Current Medications">Suggested Medications:</label>
+                  <textarea  name="med" placeholder="Medicines" rows="2" cols="200" [value]="medicationTest"></textarea>
+                </div>
+          </div>
+          <div class="col-md-10">
+              <div class="form-group">
+                  <label class="control-label" for="Current Medications">Suggested Lab Test:</label>
+                  <textarea name="med" placeholder="Medicines" rows="2" cols="200" [value]="diagnosisTest"></textarea>
+                </div>
+          </div>
+          
+       </div>
+     </div>
+     </div>
+     <div class="col-md-3 text-right" *ngIf="isPrescripAvail">
+        <button class="btn btn-success btn-block" (click)="openPDF()">Download Prescription</button>
+    </div>
+    <!--  </form> -->
+   </div>
     
           
             

@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HttpService {
-  sprBootBaseUrl:string="http://10.97.86.155:9000";
+  sprBootBaseUrl:string="http://10.95.48.80:9000";
   constructor(private httpClient: HttpClient) { }
 
   getPatientResourceByQueryParam(baseResource: string, queryParams: string) {
@@ -24,12 +24,12 @@ export class HttpService {
     return this.httpClient.post(uri, null).toPromise();
   } 
 
-  postDataQuestionaire(a:any) {
-   const uri= this.sprBootBaseUrl+"/smartDiagnosis";
-   return this.httpClient.post(uri, a).toPromise();
+  postDataQuestionaire(a:any,endpoint:string) {
+   const uri= this.sprBootBaseUrl+endpoint;
+   return this.httpClient.post(uri, a,{responseType: 'text'}).toPromise();
  } 
 
-
+ 
   getDataFromPatients(){
    return this.httpClient.get(this.sprBootBaseUrl+"/patient").toPromise();
   }

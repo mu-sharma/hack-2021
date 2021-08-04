@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    localStorage.removeItem('questionaireRequest');
+    localStorage.removeItem('questionaireResponse');
     if (this.loginForm.invalid) {
       return;
     }

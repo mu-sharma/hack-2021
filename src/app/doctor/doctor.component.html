@@ -182,21 +182,28 @@
    <div class="container">
     <!--  <form [formGroup]="addForm3" (ngSubmit)="onSubmit()"> -->
    <div class="card m-b-15">
-   <div class="card-header" style="background-color:mediumaquamarine;">Download Past Medical Reports: </div>
+   <div class="card-header" style="background-color:mediumaquamarine;">Download Patient Medical Reports </div>
    <div class="card-body">
        <div class="row">
          <ul>
 <li>
-          <a href="./../../assets/users.json" download> File 1</a>
+          <a href="./../../assets/abdomen-mri-with-contrast-2021-05-04.pdf" download> abdomen-mri-with-contrast-2021-05-04</a>
         </li>
         <li>
-          <a href="./../../assets/users.json" download> File 2</a>
-         </li> </ul>
+          <a href="./../../assets/chest-mri-without-contrast-2021-03-02.pdf" download> chest-mri-without-contrast-2021-03-02</a>
+         </li>
+         <li>
+          <a href="./../../assets/cervical-spine-mri-2020-01-07.pdf" download> cervical-spine-mri-2020-01-07</a>
+         </li>
+         <li>
+          <a href="./../../assets/medical_summarry-2020-01-05.pdf" download> medical_summarry-2020-01-05</a>
+         </li>
+        </ul>
          </div></div></div></div>
 
 
 <div class="container">
-    <!--  <form [formGroup]="addForm3" (ngSubmit)="onSubmit()"> -->
+      <form [formGroup]="addFormPrescription" (ngSubmit)="sendPrescriptionInfo(addFormPrescription)">
    <div class="card m-b-15">
    <div class="card-header" style="background-color:mediumaquamarine;">Current Health Observations</div>
    <div class="card-body" style="background-color:lightblue;">
@@ -205,43 +212,30 @@
           <div class="col-md-12">
               <div class="form-group">
                   <label class="control-label" for="Symptoms & Observations">Symptoms & Observations:</label>
-                  <textarea name="message" placeholder="Observations" rows="2" cols="200" [value]="symptoms"></textarea>
+                  <textarea name="symptom"  formControlName="symptom" name="symptom" placeholder="Observations" rows="2" cols="200" [value]="symptoms"></textarea>
                 </div>
           </div>
 
           <div class="col-md-12">
               <div class="form-group">
-                  <label class="control-label" for="Current Medications">Suggested Medications:</label>
-                  <textarea name="med" placeholder="Medicines" rows="2" cols="200" [value]="medicationTest"></textarea>
+                  <label class="control-label" for="Suggested Medications">Suggested Medications:</label>
+                  <textarea name="medicine" formControlName="medicine" name="medicine" placeholder="Medicines" rows="2" cols="200" [value]="medicationTest"></textarea>
                 </div>
           </div>
           <div class="col-md-12">
               <div class="form-group">
-                  <label class="control-label" for="Current Medications">Suggested Lab Test:</label>
-                  <textarea name="med" placeholder="Medicines" rows="2" cols="200" [value]="diagnosisTest"></textarea>
+                  <label class="control-label" for="Suggested Lab Test">Suggested Lab Test:</label>
+                  <textarea name="ltest" formControlName="ltest"  rows="2" cols="200" [value]="diagnosisTest"></textarea>
                 </div>
           </div>
        </div>
      </div>
      </div>
-    <!--  </form> -->
+     <div class="button-align">
+        <button class="btn btn-success" type="submit">Send Prescription</button>
+      </div>
+    </form>
    </div>
 
- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
-   
-<ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Hi
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
-</ng-template> 
 
 

@@ -22,6 +22,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from './service/global.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -48,9 +50,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HighchartsChartModule,
     NgbModule,
     BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot()
+ 
   ],
-  providers: [UserService, GlobalService,SharedService],
+  providers: [UserService, GlobalService,SharedService,ToastrModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

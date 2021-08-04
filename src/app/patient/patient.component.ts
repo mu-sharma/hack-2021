@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import {PatientProfileComponent} from './../patient-profile/patient-profile.component'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from './../service/http.service';
@@ -9,6 +9,15 @@ import * as Highcharts from 'highcharts';
 import {Router,ActivatedRoute, ParamMap} from "@angular/router";
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import domtoimage from 'dom-to-image';
+
+import { ToastrService } from 'ngx-toastr';
+
+
+
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 
 @Component({
@@ -17,7 +26,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./patient.component.sass']
 })
 export class PatientComponent implements OnInit {
-  i:number=1;
+isPrescripAvail:boolean=false;
+chooseHospital:boolean=false;
+chooseCategory:boolean=false;
+connectToDoc:boolean=false;
+i:number=1;
 showInfo:boolean=false;
 patientInfo:any;
 observationInfo:any;
@@ -48,8 +61,11 @@ dropdownList = [];
 selectedItems = [];
 dropdownSettings:IDropdownSettings = {};
 questionaireForm: FormGroup;
+diagnosisTest:any="";
+medicationTest:any="";
+@ViewChild('htmlData') htmlData:ElementRef;
 
-constructor(private formBuilder: FormBuilder,private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService,private router: Router,private route: ActivatedRoute) {
+constructor(private toastr: ToastrService,private formBuilder: FormBuilder,private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService,private router: Router,private route: ActivatedRoute) {
   const routeParams = this.route.snapshot.paramMap;
   this.careName = routeParams.get('name');
 }
@@ -73,9 +89,9 @@ constructor(private formBuilder: FormBuilder,private modalService: NgbModal,priv
       { item_id: 4, item_text: 'UHC Care Netherland' }
   ]; 
 
-  this.selectedItems = [
+ /*  this.selectedItems = [
     { item_id: 1, item_text: 'UHC Care US' }
-  ]; 
+  ];  */
   
   this.dropdownSettings = {
     singleSelection: false,
@@ -94,12 +110,14 @@ constructor(private formBuilder: FormBuilder,private modalService: NgbModal,priv
     this.fetchMedicationsInfo();
     this.fetchImmunizationInfo();
     this.fetchConditionInfo();
+    this.getPrescription();
   
   }
   enableProfile():void{
     this.showInfo=true;
   }
   onItemSelect(item: any) {
+    this.connectToDoc=true;
     console.log(item);
   }
   onSelectAll(items: any) {
@@ -139,7 +157,6 @@ constructor(private formBuilder: FormBuilder,private modalService: NgbModal,priv
    for (let medication of this.medicationInfo){
      
       this.medications=this.medications +medication.display + " ,";
-   
    
   }
    }
@@ -191,11 +208,11 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 47
       }, {
-        name: 'Blood Pressure',
-        y: 34.5
+        name: 'Systolic Blood Pressure',
+        y: 107
       }, {
         name: 'Blood Glucose',
-        y: 21.2
+        y: 5.9
       }]
     }, {
       name: '2021-02-19',
@@ -204,11 +221,11 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 48
       }, {
-        name: 'Blood Pressure',
-        y: 34.5
+        name: 'Systolic Blood Pressure',
+        y: 115
       }, {
         name: 'Blood Glucose',
-        y: 20.2
+        y: 3.5
       }]
     }, {
       name: '2020-11-30',
@@ -217,11 +234,11 @@ getHealthComparision(dataList:any){
         name: 'Heart Rate',
         y: 44
       }, {
-        name: 'Blood Pressure',
-        y: 36.5
+        name: 'Systolic Blood Pressure',
+        y: 120
       }, {
         name: 'Blood Glucose',
-        y: 20.2
+        y: 4.6
       }]
       
       }
@@ -273,7 +290,7 @@ for(let a of entryList){
   let componentList=a.resource.component;
   let effectiveDateTime= a.resource.effectiveDateTime;
   for(let a of componentList){
-  /*   if(a.code.text=='Blood pressure'){
+  /*   if(a.code.text=='Systolic Blood Pressure'){
       let b=a.valueQuantity.value;
       a.valueQuantity.value=b.replace('.','-');
     } */
@@ -311,13 +328,73 @@ this.diagnosisHistoryList.push(this.parentObj);
       "frequency" :form.controls.q2.value
       }
   ];
-  
-  const bundle: any = await this.httpService.postDataQuestionaire(request);
   localStorage.removeItem('questionaireRequest');
   localStorage.removeItem('questionaireResponse');
-  localStorage.setItem('questionaireRequest', JSON.stringify(request));
-  localStorage.setItem('questionaireResponse', JSON.stringify(bundle));
+  
+  const bundle: any = await this.httpService.postDataQuestionaire(request,"/smartDiagnosis")
+  .then((value) =>{
+    this.toastr.success('congrats!', 'Data sent Successfully!');
+    localStorage.setItem('questionaireRequest', JSON.stringify(request));
+    localStorage.setItem('questionaireResponse', value);
+    console.log(value);
+  } );
  
+
+  
   }
-   
+  enableHospital(){
+    this.chooseHospital=true;
+  }
+  enableCategory(){
+    this.chooseCategory=true;
+  }
+  public openPDF() {
+    const div = document.getElementById('htmlData');
+    const options = { background: 'white', height: 500, width: 700 };
+    domtoimage.toPng(div, options).then((dataUrl) => {
+        //Initialize JSPDF
+        const doc = new jsPDF('p', 'mm', 'a4');
+        //Add image Url to PDF
+        doc.addImage(dataUrl, 'PNG',10, 10, 180, 150);
+        doc.save('prescription_2438175.pdf');
+    });
+  
+    }
+
+    getPrescription(){
+
+      
+      this.medicationTest = JSON.parse(localStorage.getItem('medicine'));
+      this.diagnosisTest = JSON.parse(localStorage.getItem('labTest'));
+      if(this.medicationTest &&   this.diagnosisTest){
+        this.isPrescripAvail=true;
+      }
+     // let req = JSON.parse(localStorage.getItem('questionaireRequest'));
+    /*  let x=localStorage.getItem('questionaireResponse');
+      let res = JSON.parse(localStorage.getItem('questionaireResponse'));
+      if(res){
+        this.isPrescripAvail=true;
+      }
+    
+      for (let dt of res.diagnosisTest){
+        this.diagnosisTest=this.diagnosisTest +dt + " ,";
+        
+    }
+    
+    for (let med of res.medication){
+      this.medicationTest=this.medicationTest +med + " ,";
+      
+    }
+     */
+    /* for (let symp of this.questionaireRequest){
+      this.symptoms="Symptoms :" +symp.symptom + " Frequency :"+symp.frequency+ ", ";
+      
+    } */
+ //   this.getSymptoms(this.questionaireRequest);
+    console.log(this.medicationTest);
+}
+
+submitFiles(){
+  this.toastr.success('4 Files!', 'Uploaded Successfully!');
+}
 }

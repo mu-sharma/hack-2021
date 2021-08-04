@@ -10,6 +10,9 @@ import { SharedService } from '../service/shared.service';
 import { HttpService } from './../service/http.service';
 import { interval, Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 //changeDetection: ChangeDetectionStrategy.OnPush
 
@@ -19,7 +22,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.sass']
 })
-export class DoctorComponent implements OnInit,OnDestroy,AfterContentChecked {
+export class DoctorComponent implements OnInit,OnDestroy {
   careName:string="UHC Care US";
   showInfo:boolean=false;
 patientInfo:any;
@@ -50,8 +53,9 @@ questionaireResponse:any;
 diagnosisTest:string="";
 medicationTest:string="";
 symptoms:string="";
+addFormPrescription:FormGroup;
 
-constructor(private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService) {}
+constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private modalService: NgbModal,private httpService: HttpService, private sharedService: SharedService) {}
 
   ngOnInit() {
     this.fetchPatientInfo();
@@ -61,8 +65,13 @@ constructor(private modalService: NgbModal,private httpService: HttpService, pri
     this.fetchImmunizationInfo();
     this.fetchConditionInfo();
     this.getKnowGrapghPrediction();
-    this.consumeDataFromPatients();
-    
+   
+    this.addFormPrescription = this.formBuilder.group({
+      symptom: [],
+      medicine: [],
+      ltest: []
+     
+    });
   
   }
   enableProfile():void{
@@ -192,16 +201,7 @@ this.diagnosisHistoryList.push(this.parentObj);
 
 
 
-  ngAfterContentChecked(){
- // this.consumeDataFromPatients();
-   } 
-
-async consumeDataFromPatients(){
-  const bundle: any = await this.httpService.getDataFromPatients();
-  console.log("bundle", bundle);
-//  alert(bundle);
-
-}
+ 
    
 Highcharts: typeof Highcharts = Highcharts;
 chartOptions: Highcharts.Options = {
@@ -277,12 +277,24 @@ for (let med of this.questionaireResponse.medication){
   
 }
 
-for (let symp of this.questionaireRequest){
+/* for (let symp of this.questionaireRequest){
   this.symptoms="Symptoms :" +symp.symptom + " Frequency :"+symp.frequency+ ", ";
   
-}
-
-
+} */
+this.getSymptoms(this.questionaireRequest);
 console.log(this.medicationTest);
 }
+
+async getSymptoms(request:any){
+   const bundle: any = await this.httpService.postDataQuestionaire(request,"/getSymtoms");
+   this.symptoms=bundle;
+  }
+ 
+  sendPrescriptionInfo(form:FormGroup){
+    this.medicationTest=form.controls.medicine.value;
+    this.diagnosisTest=form.controls.ltest.value;
+    localStorage.setItem("medicine",JSON.stringify(this.medicationTest));
+    localStorage.setItem("labTest",JSON.stringify(this.diagnosisTest));
+    this.toastr.success('Patient Id: 2438175!', 'Prescription sent Successfully!');
+  }
 }

@@ -19,6 +19,7 @@ export class SharedService {
  // REPLACE WITH
  // private fetchData$: Observable<string> = this.myservice.checkdata();
   fetchData$: Observable<string> = of("Last information");
+  available:Observable<boolean>=of(false);
 
   refreshInterval$: Observable<string> = timer(5, 1000)
    .pipe(
